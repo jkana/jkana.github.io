@@ -301,7 +301,7 @@ Your choice :
 0x804b1d8	0x00000000	0x00021e29	....)...	 <-- Top chunk
 ```
 
-- Kiểm tra heap ta thấy bark tới **0x804b1a0** và **0x804b1b0** đã được free và có giá trị là **0x00000000**. Ấn c để tiếp tục, và chọn 0
+- Kiểm tra heap ta thấy bark tới **0x804b1a0** và **0x804b1b0** đã được free và có giá trị là **0x00000000**. Ấn c để tiếp tục, và chọn 0 .
 ```
 pwndbg> c
 Continuing.
@@ -349,7 +349,7 @@ Note[0]: Size 32, Content "AAAA"
 Note[1]: Size 32, Content "BBBB"
 Note[2]: Size 32, Content "CCCC"
 ```
-- Chọn **del_note**, lúc này chương trình sẽ break trước khi del, vì vậy heap vẫn còn nguyên 3 chunk cho 3 Note. Sử dụng **vis_heap_chunks** để kiểm tra heap
+- Chọn **del_note**, lúc này chương trình sẽ break trước khi del, vì vậy heap vẫn còn nguyên 3 chunk cho 3 Note. Sử dụng **vis_heap_chunks** để kiểm tra heap.
 
 ```
 0x804b198	0x00000000	0x00000011	........
@@ -379,8 +379,8 @@ Note[2]: Size 32, Content "CCCC"
 0x804b258	0x00000000	0x00021da9	........	 <-- Top chunk
 ```
 
-- Để ý thấy **0x804b1a0, 0x804b1e0, 0x804b220** tương ứng với con trỏ **print_note** của **notelist[0], notelist[1], notelist[2]**
-- Ấn c để tiếp tục chương trình, chọn 0 để giải phóng **notelist[0]**
+- Để ý thấy **0x804b1a0, 0x804b1e0, 0x804b220** tương ứng với con trỏ **print_note** của **notelist[0], notelist[1], notelist[2]**.
+- Ấn c để tiếp tục chương trình, chọn 0 để giải phóng **notelist[0]**.
 
 ```
 pwndbg> c
@@ -471,7 +471,7 @@ tcachebins
 0x20 [  2]: 0x804b1f0 — 0x804b1b0 — 0x0
 ```
 
-- Lần lượt các địa chỉ **0x804b1e0** và **0x804b1f0** được thêm vào **0x10** và **0x20**
+- Lần lượt các địa chỉ **0x804b1e0** và **0x804b1f0** được thêm vào **0x10** và **0x20**.
 - Ấn c để tiếp tục, lần này ta delete **note_list[2]**. Sau đó ta chọn **add_note**. Lần này ta sẽ dùng **add_note** để xem glibc sẽ sử dụng chunk trong tcachebins như thế nào. Tất nhiên, chương trình sẽ break trước khi ta thực hiện add_note.
 
 ```
@@ -480,7 +480,7 @@ tcachebins
 0x10 [  2]: 0x804b220 — 0x804b1e0 — 0x804b1a0 — 0x0
 0x20 [  2]: 0x804b230 — 0x804b1f0 — 0x804b1b0 — 0x0
 ```
-- Lần lượt các địa chỉ **0x804b220** và **0x804b230** được thêm vào **0x10** và **0x20**
+- Lần lượt các địa chỉ **0x804b220** và **0x804b230** được thêm vào **0x10** và **0x20**.
 - Ấn c để tiếp tục việc **add_note**. Lần này ta chọn size 8 và content là **FFFF** . Lí do ta chọn 8 là vì ta cần 1 chunk < size 32, vì nếu to quá, glibc sẽ không sử dụng địa chỉ từ bins để cấp phát bộ nhớ cho đối tượng **note_list[3]**.
 
 ```
@@ -541,7 +541,7 @@ struct note {
   char *content;
 };
 ```
-- Tiếp tục kiểm tra, ta nhận thấy rằng **0x804b1e0** trước đó là địa chỉ chứa thông tin mà **note_list[2]->print_note** trỏ tới (trước khi free **note_list[1]**, nó lưu giá trị **0x0804865b**). Vậy nghĩa là nếu ta gọi **print_note** cho **note_list[1]**, EIP sẽ có giá trị là **FFFF**. Để kiểm chứng việc này, ta sẽ ấn c để tiếp tục, và nhập giá trị index là 1
+- Tiếp tục kiểm tra, ta nhận thấy rằng **0x804b1e0** trước đó là địa chỉ chứa thông tin mà **note_list[2]->print_note** trỏ tới (trước khi free **note_list[1]**, nó lưu giá trị **0x0804865b**). Vậy nghĩa là nếu ta gọi **print_note** cho **note_list[1]**, EIP sẽ có giá trị là **FFFF**. Để kiểm chứng việc này, ta sẽ ấn c để tiếp tục, và nhập giá trị index là 1 .
 
 ```
 pwndbg> c
