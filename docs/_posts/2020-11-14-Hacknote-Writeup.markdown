@@ -303,6 +303,7 @@ Your choice :
 ```
 
 - Kiểm tra heap ta thấy bark tới **0x804b1a0** và **0x804b1b0** đã được free và có giá trị là **0x00000000**. Ấn c để tiếp tục, và chọn **0** .
+
 ```
 pwndbg> c
 Continuing.
@@ -321,8 +322,8 @@ LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
 *EBP  0xffffd2c8 —▸ 0xffffd2e8 ◂— 0x0
 *ESP  0xffffd29c —▸ 0x804896f (print_note+154) ◂— add    esp, 0x10
 *EIP  0x0
-
 ```
+
 - Chương trình lập tức crash và EIP lúc này có giá trị là **0x00000000**. Lí do là vì con trỏ của **print_note** không được reset mà vẫn đang trỏ tới địa chỉ **0x804b1a0**, đồng thời do ta đã thực hiện free trước đó nên địa chỉ **0x804b1a0** chỉ lưu **0x00000000**. Đây là điểm ta có thể khai thác bằng Use-after-free. 
 
 **4.Use-After-Free và Heap**
