@@ -336,7 +336,7 @@ death in section .text of /challenge/app-systeme/ch63/ch63
 - Ta có thể thấy được vùng dữ liệu đã được giải phóng. Do con trỏ không được reset, nên ta vẫn có thể gọi được dog->bark qua options 2.(Chó chết rồi nhưng vẫn sủa được)
 - Nhập c để tiếp tục thực hiện việc điền thông tin cho DogHouse Với address là **BBBBCCCCDDDDEEEE** và Name là **FFFF**
 ![](https://raw.githubusercontent.com/jkana/Writeup/main/Root-me/Images/4.JPG)
-- Nhập 2 để gọi **bark**, chương trình sẽ crash khi gọi **bark**
+- Nhập 2 để gọi **bark**, chương trình sẽ crash khi gọi **bark**.
 
 ```
 Where do you build it?
@@ -353,7 +353,6 @@ You build a new dog house.
 7: Break dog house
 0: Quit
 2
-
 Program received signal SIGSEGV, Segmentation fault.
 0x45454545 in ?? ()
 ```
