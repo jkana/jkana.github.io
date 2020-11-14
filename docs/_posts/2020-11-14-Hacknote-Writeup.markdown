@@ -179,6 +179,7 @@ void del_note() {
 gdb ./hacknote
 ```
 - Hiển thị các function
+
 ```
 pwndbg> info functions 
 All defined functions:
@@ -215,7 +216,8 @@ Non-debugging symbols:
 0x08048b60  __libc_csu_fini
 0x08048b64  _fini
 ```
-- Đặt break tại các function **add_note, del_note, print_note**
+
+- Đặt break tại các function **add_note, del_note, print_note**.
 
 ```
 pwndbg> b * add_note 
@@ -330,7 +332,7 @@ LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
 - Khi chương trình thực hiện free memory, glibc sẽ không trả lại vùng memory này cho kernel, thay vào đó glibc đưa các chunk này vào các bins. Các chunk được đặt trong bins sẽ có thể được glibc cấp phát cho lần yêu cầu khác của chương trình thay vì glibc lại yêu cầu kernel cấp mới. Cho dễ hiểu, nó giống như việc tái sử dụng những gì có sẵn.
 - Glibc sử dụng nhiều bins để quản lý bộ nhớ, bao gồm: tcachebins, fastbins, unsorted bins. Việc sử dụng bins nào để lưu chunk thì có nhiều lí do. Một trong những lí do quan trọng trong việc quyết định chunk được lưu ở bins nào là size memory được yêu cầu free.
 - Nếu đoạn trên quá khó hiểu, thì ta sẽ từ từ phân tích trong quá trình exploit.
-- Tương tự mục 3, ta đặt break tại các function **add_note, del_note, print_note**
+- Tương tự mục 3, ta đặt break tại các function **add_note, del_note, print_note**.
 
 ```
 pwndbg> b * add_note 
