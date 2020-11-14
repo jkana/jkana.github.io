@@ -337,6 +337,7 @@ death in section .text of /challenge/app-systeme/ch63/ch63
 - Nhập c để tiếp tục thực hiện việc điền thông tin cho DogHouse Với address là **BBBBCCCCDDDDEEEE** và Name là **FFFF**
 ![](https://raw.githubusercontent.com/jkana/Writeup/main/Root-me/Images/4.JPG)
 - Nhập 2 để gọi **bark**, chương trình sẽ crash khi gọi **bark**
+
 ```
 Where do you build it?
 BBBBCCCCDDDDEEEE
@@ -356,6 +357,7 @@ You build a new dog house.
 Program received signal SIGSEGV, Segmentation fault.
 0x45454545 in ?? ()
 ```
+
 - Kiểm tra heap ta thấy bark tới **0x45454545** và crash. Vì con trỏ không được reset nên nó vẫn trỏ tới **0x9595014** và ta hoàn toàn có thể kiểm soát được giá trị ở địa chỉ này.
 ```
 (gdb)  x/50x 0x9595000
