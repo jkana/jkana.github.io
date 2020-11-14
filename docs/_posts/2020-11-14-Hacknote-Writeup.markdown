@@ -251,6 +251,7 @@ Your choice :
 ```
 - Chọn **del_note** để free note. Chương trình sẽ break trước khi thực hiện việc free, vì vậy lúc này ta có thể kiểm tra thông tin heap.
 - Sử dụng **vis_heap_chunks** để kiểm tra vùng heap
+
 ```
 0x804b190	0x00000000	0x00000000	........
 0x804b198	0x00000000	0x00000011	........
