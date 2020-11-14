@@ -302,7 +302,7 @@ Your choice :
 0x804b1d8	0x00000000	0x00021e29	....)...	 <-- Top chunk
 ```
 
-- Kiểm tra heap ta thấy bark tới **0x804b1a0** và **0x804b1b0** đã được free và có giá trị là **0x00000000**. Ấn c để tiếp tục, và chọn 0 .
+- Kiểm tra heap ta thấy bark tới **0x804b1a0** và **0x804b1b0** đã được free và có giá trị là **0x00000000**. Ấn c để tiếp tục, và chọn **0** .
 ```
 pwndbg> c
 Continuing.
