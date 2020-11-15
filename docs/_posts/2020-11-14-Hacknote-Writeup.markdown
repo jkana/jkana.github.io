@@ -581,9 +581,6 @@ LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
 - PoC
 
 ```
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from pwn import *
 
 host = "127.0.0.1"
