@@ -25,7 +25,13 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-analytics
 
+jekyll_analytics:
+  GoogleAnalytics:          
+    id: UA-183254610-1         
+    anonymizeIp: false
+ 
 # Custom variables
 owner : "Jkana"
 year : "2020"
